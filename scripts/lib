@@ -26,5 +26,9 @@ status() {
 # $1 - Name of the image
 # $2 - Version of the image
 image-name() {
-    echo "ghcr.io/toltec-dev/$1:${2:-latest}"
+    if [ -n "${GITHUB_REPOSITORY:-}" ]; then
+        echo "ghcr.io/${GITHUB_REPOSITORY}/$1:${2:-latest}"
+    else
+        echo "ghcr.io/toltec-dev/$1:${2:-latest}"
+    fi
 }
